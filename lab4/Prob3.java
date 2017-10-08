@@ -1,17 +1,41 @@
 import java.util.Hashtable;
 
 class HSet extends Hashtable {
-	Hashtable <String, String> table;
-	int size;
+	private static final long serialVersionUID = 1L;
+
 	public HSet ()
 	{
-		this.table = new Hashtable <>(100);
-		this.size = 0;
+		super();
 	}
 	
-	public void add (String value, String key)
+	@SuppressWarnings("unchecked")
+	public boolean add (Object value, Object key)
 	{
+		boolean ok = false;
+		if (!super.contains(value))
+			{
+				super.put(key, value);
+				ok = true;
+			}
+		return ok;
 		
+	}
+	public int size ()
+	{
+		return super.size();
+	}
+	
+	public String toString()
+	{
+		return super.toString();
+	}
+	
+	public Object remove (Object key) {
+		return super.remove(key);
+	}
+	
+	public boolean remove (Object key, Object value) {
+		return super.remove(key, value);
 	}
 }
 
