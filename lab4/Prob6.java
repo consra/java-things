@@ -3,19 +3,15 @@ class Alien {
     public static final int OGRE_ALIEN = 1;
     public static final int MARSHMALLOW_MAN_ALIEN = 2;
 
-    //Stores one of the three above types
-    //public int type;
-    //0 = dead, 100 = full strength
     public int health;
     public String name;
 
     public Alien(int health, String name) {
-        //this.type = type;
         this.health = health;
         this.name = name;
     }
 }
-/*
+
 class AlienPack {
     private Alien[] aliens;
 
@@ -34,21 +30,21 @@ class AlienPack {
     public int calculateDamage() {
         int damage = 0;
         for (int i = 0; i < aliens.length; i++) {
-            if (aliens[i].type == Alien.SNAKE_ALIEN) {
+            if (aliens[i] instanceof Snake_Alien) {
                 //Snake does 10 damage
-                damage += 10;
-            } else if (aliens[i].type == Alien.OGRE_ALIEN) {
+                damage += Snake_Alien.getDamage();
+            } else if (aliens[i] instanceof Ogre_Alien) {
                 //Ogre does 6 damage
-                damage += 6;
-            } else if (aliens[i].type == Alien.MARSHMALLOW_MAN_ALIEN) {
+                damage += Ogre_Alien.getDamage();
+            } else if (aliens[i] instanceof Marshmallow_Man_Alien) {
                 //Marshmallow Man does 1 damage
-                damage += 1;
+                damage += Marshmallow_Man_Alien.getDamage();
             }
         }
         return damage;
     }
 }
-*/
+
 class Snake_Alien extends Alien {
 	public static final int SNAKE_DAMAGE = 10;
 	
@@ -57,12 +53,10 @@ class Snake_Alien extends Alien {
 		super(health, name);
 	}
 	
-	public int getDamage()
+	public static int getDamage()
 	{
 		return SNAKE_DAMAGE;
 	}
-	
-	
 }
 
 class Ogre_Alien extends Alien {
@@ -73,7 +67,7 @@ class Ogre_Alien extends Alien {
 		super(health, name);
 	}
 	
-	public int getDamage()
+	public static int getDamage()
 	{
 		return SNAKE_DAMAGE;
 	}
@@ -87,7 +81,7 @@ class Marshmallow_Man_Alien extends Alien {
 		super(health, name);
 	}
 	
-	public int getDamage()
+	public static int getDamage()
 	{
 		return SNAKE_DAMAGE;
 	}
@@ -97,8 +91,11 @@ public class Prob6 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Marshmallow_Man_Alien one = new Marshmallow_Man_Alien(69, "kuku");
-		System.out.print(one.getDamage());
+		AlienPack my_pack = new AlienPack(50);
+		my_pack.addAlien(new Snake_Alien(20, "lel"),  0);
+		my_pack.addAlien(new Ogre_Alien(40, "meh"), 1);
+		my_pack.addAlien(new Marshmallow_Man_Alien(30, "hihi"), 2);
+		System.out.println(my_pack.calculateDamage());
 
 	}
 
